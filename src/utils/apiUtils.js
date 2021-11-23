@@ -1,7 +1,7 @@
 import axios from 'axios';
-const baseUrl = process.env.BASE_URL;
+const baseUrl = "http://localhost:3000";
 
-export const login = (username: string, password: string) =>
+export const login = (username, password) =>
   axios({
     method: 'post',
     url: `${baseUrl}/login`,
@@ -11,7 +11,7 @@ export const login = (username: string, password: string) =>
     },
 });
 
-export const signup = (username: string, password: string) =>
+export const signup = (username, password) =>
   axios({
     method: 'post',
     url: `${baseUrl}/signup`,

@@ -9,14 +9,14 @@
     </el-form-item>
     
     <el-form-item class="login_btn">
-      <el-button type="primary" @click="login">Login</el-button>
+      <el-button type="primary" @click="login()">Login</el-button>
     </el-form-item>
 
   </el-form>
 </template>
 
 <script>
-import { login } from '../../../../utils/apiUtils.ts';
+import * as apiUtils from '../../../../utils/apiUtils.js';
 export default {
   name: 'Login',
   data() {
@@ -30,8 +30,7 @@ export default {
   },
   methods: {
     async login() {
-      this.$router.push('home')
-      const postLoginResponse = await login( this.formLabelAlign.username, this.formLabelAlign.password );
+      const postLoginResponse = await apiUtils.login( this.formLabelAlign.username, this.formLabelAlign.password );
         if (postLoginResponse.status === 200) {
         this.$router.push('home')
       }
