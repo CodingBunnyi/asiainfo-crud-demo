@@ -8,7 +8,7 @@
 
     }"
 
-    v-on:click="handleUpdateActivated()"
+    @click="handleUpdateActivated"
   >
     {{optionType.toUpperCase()}}
   </button>

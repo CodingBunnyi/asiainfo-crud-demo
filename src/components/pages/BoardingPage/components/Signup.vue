@@ -9,17 +9,19 @@
     </el-form-item>
 
     <el-form-item label="Nicky Name">
-      <el-input placeholder="Your nicky name" v-model="formLabelAlign.nickyName" show-password></el-input>
+      <el-input placeholder="Your nicky name" v-model="formLabelAlign.nickyName"></el-input>
     </el-form-item>
     
     <el-form-item class="signup_btn">
-      <el-button type="primary" >Signup</el-button>
+      <el-button type="primary" @click="signup()">Signup</el-button>
     </el-form-item>
 
   </el-form>
 </template>
 
 <script>
+import * as apiUtils from '../../../../utils/apiUtils.js';
+
 export default {
   name: 'Signup',
   data() {
@@ -31,6 +33,15 @@ export default {
         nickyName: '', 
       }
     };
+  },
+  methods: {
+    async signup() {
+      const postSignupResponse = await apiUtils.signup( this.formLabelAlign.username, this.formLabelAlign.password, this.formLabelAlign.nickyName );
+        if (postSignupResponse.status === 200) {
+        alert("Success signup")
+        this.$emit('toLogin', 'login')
+      }
+    },
   },
 }
 </script>

@@ -12,9 +12,17 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: "history",
   routes: [
-    { path: "/home", component: HomePage },
-    { path: '/', component: BoardingPage },
+    { path: "/home", name: "HomePage", component: HomePage },
+    { path: '/', name: "BoardingPage", component: BoardingPage },
    ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'BoardingPage' && !localStorage.getItem("nickyName")) next({ name: 'BoardingPage' })
+  else next()
+
+  if (to.name === 'BoardingPage' && localStorage.getItem("nickyName")) next({ name: 'HomePage' })
+  else next()
 })
 
 new Vue({

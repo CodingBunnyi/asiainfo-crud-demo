@@ -8,7 +8,7 @@
 
       <div class="content">
         <Login v-if="activatedName === 'login'"/>
-        <Signup v-if="activatedName === 'signup'"/>
+        <Signup v-if="activatedName === 'signup'" @toLogin="updateActivated"/>
       </div>
     </div>
   </div>

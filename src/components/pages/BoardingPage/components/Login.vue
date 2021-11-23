@@ -32,6 +32,7 @@ export default {
     async login() {
       const postLoginResponse = await apiUtils.login( this.formLabelAlign.username, this.formLabelAlign.password );
         if (postLoginResponse.status === 200) {
+        localStorage.setItem('nickyName', postLoginResponse.data.nickyName)
         this.$router.push('home')
       }
     }

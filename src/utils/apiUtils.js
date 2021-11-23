@@ -11,12 +11,13 @@ export const login = (username, password) =>
     },
 });
 
-export const signup = (username, password) =>
+export const signup = (username, password, nickyName) =>
   axios({
     method: 'post',
     url: `${baseUrl}/signup`,
     data: {
       username,
       password, 
+      nickyName,
     },
 });

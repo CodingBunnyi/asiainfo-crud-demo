@@ -36,18 +36,17 @@ router.render = (req, res) => {
     res.sendStatus(401);
    }
   }
-  // if (url === '/api/v1/invitations/register' && req.method === 'POST') {
-  //  res.sendStatus(200);
-  //  const { email, password, name } = req.body;
-  //  const last_item_id = userdb.users[userdb.users.length - 1].id;
-  //  userdb.users.push({ id: last_item_id + 1, email, name, password });
-  //  fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
-  // }
- };
 
-// server.post('http://localhost:3000/login', (req, res) => {
-//   res.sendStatus(200);
-// });
+  if (url === '/signup' && req.method === 'POST') {
+   res.sendStatus(200);
+   const { username, password, nickyName } = req.body;
+   const last_item_id = userdb.users[userdb.users.length - 1].id;
+   userdb.users.push({ id: last_item_id + 1, username, nickyName, password });
+   fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
+  } else {
+    res.sendStatus(401);
+   }
+ };
 
 server.use(router)
 server.listen(3000, () => {
