@@ -16,6 +16,7 @@
     </div>
 
     <el-button type="primary" @click="signout()">Signout</el-button>
+    <el-button type="primary" class="delete_btn" @click="deleteAccount()">Delete account</el-button>
   </div>
 </template>
 
@@ -31,11 +32,22 @@ export default {
     },
     async changeNickyName() {
       const id = localStorage.getItem('id');
-      const putUpdateNickyNameResponse = await apiUtils.updateNickyName( id, this.formLabelAlign.newNickyName );
+      const putUpdateNickyNameResponse = await apiUtils.updateNickyName(id, this.formLabelAlign.newNickyName);
         if (putUpdateNickyNameResponse.status === 200) {
         localStorage.setItem('nickyName', this.formLabelAlign.newNickyName)
         this.nickyName = this.formLabelAlign.newNickyName;
         this.formLabelAlign.newNickyName = '';
+      }
+    },
+    async deleteAccount() {
+      const id = localStorage.getItem('id');
+      const deleteAccountResponse = await apiUtils.deleteAccount(id);
+        if (deleteAccountResponse.status === 200) {
+          alert("Delete this account successfully!")
+          this.signout()
+        // localStorage.removeItem('nickyName');
+        // localStorage.removeItem('id');
+        // this.$router.push('/')
       }
     },
   },
@@ -48,7 +60,6 @@ export default {
       nickyName: localStorage.getItem('nickyName')
     }
   },
-
 }
 </script>
 
@@ -59,5 +70,8 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+.delete_btn {
+  margin-top: 20px;
 }
 </style>

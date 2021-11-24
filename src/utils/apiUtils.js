@@ -9,7 +9,7 @@ export const login = (username, password) =>
       username,
       password,
     },
-});
+  });
 
 export const signup = (username, password, nickyName) =>
   axios({
@@ -20,7 +20,7 @@ export const signup = (username, password, nickyName) =>
       password, 
       nickyName,
     },
-});
+  });
 
 export const updateNickyName = (id, newNickyName) =>
   axios({
@@ -29,4 +29,10 @@ export const updateNickyName = (id, newNickyName) =>
     data: {
       newNickyName, 
     },
+  })
+
+export const deleteAccount = (id) =>
+  axios({
+    method: 'delete',
+    url: `${baseUrl}/users/${id}`,
   })

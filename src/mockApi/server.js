@@ -41,11 +41,17 @@ router.render = (req, res) => {
 server.patch('/users/:id', (req, res) => {
   res.sendStatus(200);
   const index = userdb.users.findIndex((user) => user.id.toString() === req.params.id.toString());
-  console.log(req.body);
   const { newNickyName } = req.body;
   userdb.users[index].nickyName = newNickyName;
   fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
 });
+
+server.delete('/users/:id', (req, res) => {
+  res.sendStatus(200);
+  const index = userdb.users.findIndex((user) => user.id.toString() === req.params.id.toString());
+  userdb.users.splice(index, 1);
+  fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
+})
 
 server.use(router)
 server.listen(3000, () => {
