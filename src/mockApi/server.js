@@ -1,5 +1,4 @@
 const jsonServer = require('json-server');
-const path = require('path')
 const fs = require('fs');
 
 const server = jsonServer.create();
@@ -15,20 +14,11 @@ function isAuthenticated({ username, password }) {
 
 router.render = (req, res) => {
   const url = req.originalUrl;
-  // signup
-  // if (url === '/api/v1/signup' && req.method === 'POST') {
-  //  res.sendStatus(200);
-  //  const { email, password, name } = req.body;
-  //  const last_item_id = userdb.users[userdb.users.length - 1].id;
-  //  userdb.users.push({ id: last_item_id + 1, email, name, password });
-  //  fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
-  // }
-  // login
   if (url === '/login' && req.method === 'POST') {
    const { username, password } = req.body;
    const index = userdb.users.findIndex((user) => user.username === username);
    if (isAuthenticated({ username, password }) === true) {
-    res.status(200).jsonp({ 
+    res.status(200).json({ 
      nickyName: userdb.users[index].nickyName,
      id: userdb.users[index].id,
    });
@@ -43,10 +33,8 @@ router.render = (req, res) => {
    const last_item_id = userdb.users[userdb.users.length - 1].id;
    userdb.users.push({ id: last_item_id + 1, username, nickyName, password });
    fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
-  } else {
-    res.sendStatus(401);
-   }
- };
+  }
+};
 
 server.use(router)
 server.listen(3000, () => {
