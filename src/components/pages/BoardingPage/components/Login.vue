@@ -33,6 +33,7 @@ export default {
       const postLoginResponse = await apiUtils.login( this.formLabelAlign.username, this.formLabelAlign.password );
         if (postLoginResponse.status === 200) {
         localStorage.setItem('nickyName', postLoginResponse.data.nickyName)
+        localStorage.setItem('id', postLoginResponse.data.id)
         this.$router.push('home')
       }
     }

@@ -1,4 +1,5 @@
 const jsonServer = require('json-server');
+const bodyParser = require('body-parser')
 const fs = require('fs');
 
 const server = jsonServer.create();
@@ -7,6 +8,7 @@ const userdb = JSON.parse(fs.readFileSync('./src/mockApi/users.json', 'UTF-8'));
 
 const middlewares = jsonServer.defaults();
 server.use(middlewares);
+server.use(bodyParser.json());
 
 function isAuthenticated({ username, password }) {
   return userdb.users.findIndex((user) => user.username === username && user.password === password) !== -1;
@@ -19,8 +21,8 @@ router.render = (req, res) => {
    const index = userdb.users.findIndex((user) => user.username === username);
    if (isAuthenticated({ username, password }) === true) {
     res.status(200).json({ 
-     nickyName: userdb.users[index].nickyName,
      id: userdb.users[index].id,
+     nickyName: userdb.users[index].nickyName,
    });
    } else {
     res.sendStatus(401);
@@ -35,6 +37,15 @@ router.render = (req, res) => {
    fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
   }
 };
+
+server.patch('/users/:id', (req, res) => {
+  res.sendStatus(200);
+  const index = userdb.users.findIndex((user) => user.id.toString() === req.params.id.toString());
+  console.log(req.body);
+  const { newNickyName } = req.body;
+  userdb.users[index].nickyName = newNickyName;
+  fs.writeFileSync('./src/mockApi/users.json', JSON.stringify(userdb));
+});
 
 server.use(router)
 server.listen(3000, () => {

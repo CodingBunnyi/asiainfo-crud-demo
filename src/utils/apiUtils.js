@@ -21,3 +21,12 @@ export const signup = (username, password, nickyName) =>
       nickyName,
     },
 });
+
+export const updateNickyName = (id, newNickyName) =>
+  axios({
+    method: 'patch',
+    url: `${baseUrl}/users/${id}`,
+    data: {
+      newNickyName, 
+    },
+  })
