@@ -45,9 +45,6 @@ export default {
         if (deleteAccountResponse.status === 200) {
           alert("Delete this account successfully!")
           this.signout()
-        // localStorage.removeItem('nickyName');
-        // localStorage.removeItem('id');
-        // this.$router.push('/')
       }
     },
   },
