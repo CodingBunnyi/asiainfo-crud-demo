@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     async signup() {
-      const postSignupResponse = await apiUtils.signup( this.formLabelAlign.username, this.formLabelAlign.password, this.formLabelAlign.nickyName );
+      const postSignupResponse = await apiUtils.signup(this.formLabelAlign.username, this.formLabelAlign.password, this.formLabelAlign.nickyName);
         if (postSignupResponse.status === 200) {
         alert("Signup successfully!")
         this.$emit('toLogin', 'login')

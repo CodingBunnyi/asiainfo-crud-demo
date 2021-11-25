@@ -20,7 +20,7 @@ export default {
   props: ['optionType', 'activatedName'],
   methods: {
     handleUpdateActivated() {
-      this.$emit('clicked', this.$props.optionType)
+      this.$emit('clicked', this.optionType)
     }
   },
 }
